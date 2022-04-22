@@ -5,6 +5,7 @@ SRC = main.c \
 	get_next_line.c \
 	get_next_line_utils.c \
 	moves/moves.c \
+	moves/player_moves.c \
 
 OBJ = $(SRC:.c=.o)
 

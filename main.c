@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/21 12:19:28 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/22 16:05:14 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	close_win(t_vars *vars)
 
 int	action_key(int keycode, t_vars *var)
 {
+	int	i;
+
 	if (keycode == 0)
 		move_left(var);
 	else if (keycode == 1)
@@ -35,10 +37,10 @@ int	action_key(int keycode, t_vars *var)
 		close_win(var);
 	if (var->n_coll == 0)
 		var->setting[var->pe[0]][var->pe[1]] = set_image(var, "porta.xpm", var->pe[0], var->pe[1]);
-	// i = -1;
-	// while (++i < var->map->rows)
-	// 	printf("%s", var->map->data[i]);
-	// printf("\n");
+	i = -1;
+	while (++i < var->map->rows)
+		printf("%s", var->map->data[i]);
+	printf("\n");
 	return (0);
 }
 
@@ -73,8 +75,8 @@ void	set_background(t_vars *vars)
 				vars->setting[i][j] = set_image(vars, "prova.xpm", i, j);
 			if (vars->map->data[i][j] == 'P')
 				vars->setting[i][j] = set_image(vars, "tizio.xpm", i, j);
-			// else if (vars->map->data[i][j] == 'E')
-			// 	vars->setting[i][j] = set_image(vars, "porta.xpm", i, j);
+			else if (vars->map->data[i][j] == 'N')
+				vars->setting[i][j] = set_image(vars, "enemy.xpm", i, j);
 			else if (vars->map->data[i][j] == 'C')
 				vars->setting[i][j] = set_image(vars, "coll.xpm", i, j);
 		}

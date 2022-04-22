@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/21 11:10:10 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/22 16:51:48 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct s_vars {
 	t_map	*map;
 	int		pp[2];
 	int		pe[2];
+	int		pn[2];
 	int		n_coll;
+	int		blocked;
 }				t_vars;
 
 char	*get_buf(int fd);
@@ -68,6 +70,6 @@ void	move_up(t_vars *vars);
 void	move_right(t_vars *vars);
 void	move_left(t_vars *vars);
 void	move_down(t_vars *vars);
-int		astar(char **map, int map_size_rows, int map_size_cols);
+void	move_enemy(t_vars *vars);
 
 #endif

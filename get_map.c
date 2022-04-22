@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:04:02 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/21 11:17:40 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/21 18:34:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	check_map2(t_vars *v, int i, int j, int check[3])
 		v->pe[0] = i;
 		v->pe[1] = j;
 		check[1]++;
+	}
+	else if (cell == 'N')
+	{
+		v->pn[0] = i;
+		v->pn[1] = j;
 	}
 	else if (cell == 'C')
 		v->n_coll++;
