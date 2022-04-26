@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/22 16:05:14 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/26 13:56:04 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	action_key(int keycode, t_vars *var)
 	int	i;
 
 	if (keycode == 0)
-		move_left(var);
+		move_player(var, 0, -1);
 	else if (keycode == 1)
-		move_down(var);
+		move_player(var, 1, 0);
 	else if (keycode == 2)
-		move_right(var);
+		move_player(var, 0, 1);
 	else if (keycode == 13)
-		move_up(var);
+		move_player(var, -1, 0);
 	if (keycode == 53 || (var->pp[0] == var->pe[0] && var->pp[1] == var->pe[1]))
 		close_win(var);
 	if (var->n_coll == 0)
@@ -60,8 +60,10 @@ void	set_background(t_vars *vars)
 {
 	int		i;
 	int		j;
+	int		n;
 
 	i = -1;
+	n = 0;
 	vars->setting = (t_data **) malloc (sizeof(t_data *) * vars->map->rows);
 	while (++i < vars->map->rows)
 	{
@@ -76,7 +78,7 @@ void	set_background(t_vars *vars)
 			if (vars->map->data[i][j] == 'P')
 				vars->setting[i][j] = set_image(vars, "tizio.xpm", i, j);
 			else if (vars->map->data[i][j] == 'N')
-				vars->setting[i][j] = set_image(vars, "enemy.xpm", i, j);
+				get_enemies(vars, i, j, &n);
 			else if (vars->map->data[i][j] == 'C')
 				vars->setting[i][j] = set_image(vars, "coll.xpm", i, j);
 		}
@@ -98,6 +100,8 @@ int	main(int argc, char **argv)
 		free_map(vars->map);
 		return (0);
 	}
+	if (vars->n_en != 0)
+		vars->enemies = (t_enemy *) malloc (vars->n_en * (sizeof(t_enemy)));
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, (vars->map->cols) * 64,
 			(vars->map->rows) * 64, "so_long");

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/22 16:51:48 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/26 14:31:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct s_map
 	int		cols;
 }				t_map;
 
+typedef struct s_enemy
+{
+	int		id;
+	int		x;
+	int		y;
+}				t_enemy;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -46,8 +53,9 @@ typedef struct s_vars {
 	t_map	*map;
 	int		pp[2];
 	int		pe[2];
-	int		pn[2];
 	int		n_coll;
+	int		n_en;
+	t_enemy	*enemies;
 	int		blocked;
 }				t_vars;
 
@@ -66,10 +74,9 @@ int		check_map(t_vars *v);
 void	free_map(t_map *map);
 int		get_h_l(char *input, t_map *map);
 t_data	set_image(t_vars *vars, char *file, int x, int y);
-void	move_up(t_vars *vars);
-void	move_right(t_vars *vars);
-void	move_left(t_vars *vars);
-void	move_down(t_vars *vars);
-void	move_enemy(t_vars *vars);
+void	get_enemies(t_vars *vars, int i, int j, int *n);
+void	move_player(t_vars *vars, int x, int y);
+void	choose_move_enemy(t_vars *vars, t_enemy e);
+void	move_enemy(t_vars *vars, t_enemy e, int x, int y);
 
 #endif
