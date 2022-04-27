@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/26 14:31:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/27 15:59:57 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data {
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
+	int		frame;
 	t_data	**setting;
 	t_map	*map;
 	int		pp[2];
@@ -56,7 +57,7 @@ typedef struct s_vars {
 	int		n_coll;
 	int		n_en;
 	t_enemy	*enemies;
-	int		blocked;
+	int		status_en;
 }				t_vars;
 
 char	*get_buf(int fd);
@@ -76,7 +77,13 @@ int		get_h_l(char *input, t_map *map);
 t_data	set_image(t_vars *vars, char *file, int x, int y);
 void	get_enemies(t_vars *vars, int i, int j, int *n);
 void	move_player(t_vars *vars, int x, int y);
-void	choose_move_enemy(t_vars *vars, t_enemy e);
-void	move_enemy(t_vars *vars, t_enemy e, int x, int y);
+void	choose_move_enemy(t_vars *vars, int id);
+void	move_enemy(t_vars *vars, int id, int x, int y);
+void	set_enemies(t_vars *vars);
+void	free_matrix(void **matrix, int rows);
+int		close_win(t_vars *vars);
+void	you_lost(t_vars *vars);
+void	you_won(t_vars *vars);
+int		update_sprites(t_vars *vars);
 
 #endif

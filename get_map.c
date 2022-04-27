@@ -6,13 +6,13 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:04:02 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/26 13:53:27 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/04/27 14:17:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_matrix(char **matrix, int rows)
+void	free_matrix(void **matrix, int rows)
 {
 	int	i;
 
@@ -24,7 +24,8 @@ void	free_matrix(char **matrix, int rows)
 
 void	free_map(t_map *map)
 {
-	free_matrix(map->data, map->rows);
+	if (map->data != NULL)
+		free_matrix((void **)map->data, map->rows);
 	free(map);
 }
 
@@ -95,6 +96,7 @@ int	get_h_l(char *input, t_map *map)
 		if (map->cols != (int)ft_strlen(tmp))
 			return (1);
 		map->rows++;
+		free(tmp);
 		tmp = get_next_line(fd);
 	}
 	map->cols--;
