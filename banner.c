@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:29:15 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 16:23:57 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:54:27 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,52 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->l_length + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-void	update_banner(t_vars *vars)
+char	*ft_strjoin_3(char *s1, int moves, char *s2)
+{
+	char	*ret;
+	char	*tmp;
+
+	ret = ft_itoa(moves);
+	tmp = ft_strjoin(s1, ret);
+	free(ret);
+	ret = ft_strjoin(tmp, s2);
+	free(tmp);
+	return (ret);
+}
+
+void	write_moves(t_vars *v)
+{
+	char	*spkr;
+	char	*spch;
+
+	spkr = "Jarvis: ";
+	if (v->moves == 0)
+		spch = "Mr. Stark, you've made no moves yet.";
+	else if (v->moves == 1)
+		spch = "Mr. Stark, you've made 1 move.";
+	else
+		spch = ft_strjoin_3("Mr. Stark, you've made ", v->moves, " moves.");
+	mlx_string_put(v->mlx, v->win, 10, (v->map->rows * 64) + 20,
+		0x00FF0000, spkr);
+	mlx_string_put(v->mlx, v->win, 10, (v->map->rows * 64) + 35,
+		0x00FFFFFF, spch);
+	if (v->moves > 1)
+		free(spch);
+	if (v->status_en > 0)
+	{
+		if (v->status_en == 1)
+			spkr = "He's breaking free!";
+		else
+			spkr = "You've blocked him";
+		mlx_string_put(v->mlx, v->win, 10, (v->map->rows * 64) + 50,
+			0x00FFFFFF, spkr);
+	}
+}
+
+void	update_banner(t_vars *vars, int finish)
 {
 	int	i;
 	int	j;
@@ -39,13 +81,15 @@ void	update_banner(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->banner->img, 0,
 		64 * vars->map->rows);
+	if (finish == 0)
+		write_moves(vars);
 }
 
-void	make_banner(t_vars *vars)
+void	make_banner(t_vars *v)
 {
-	vars->banner->img = mlx_new_image(vars->mlx, 64 * vars->map->cols, 64);
-	vars->banner->addr = mlx_get_data_addr(vars->banner->img, &vars->banner->bpp,
-		&vars->banner->l_length, &vars->banner->endian);
-	update_banner(vars);
-	mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 20, 0x00FF0000, "Jarvis: ");
+	v->banner = (t_data *) malloc (sizeof(t_data));
+	v->banner->img = mlx_new_image(v->mlx, 64 * v->map->cols, 64);
+	v->banner->addr = mlx_get_data_addr(v->banner->img, &v->banner->bpp,
+			&v->banner->l_length, &v->banner->endian);
+	update_banner(v, 0);
 }

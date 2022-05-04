@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 14:44:45 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:46:57 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_vars {
 	void	*mlx;
 	void	*win;
 	int		frame;
-	t_data	**setting;
+	int		moves;
 	t_map	*map;
 	int		pp[2];
 	int		pe[2];
@@ -87,5 +87,9 @@ void	end_game(t_vars *vars, int win);
 int		update_sprites(t_vars *vars);
 void	make_banner(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	update_banner(t_vars *vars, int finish);
+void	display_moves(int vars);
+char	*ft_itoa(int n);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

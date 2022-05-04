@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:06:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 13:19:36 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:45:28 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,21 @@ int	update_sprites(t_vars *vars)
 	return (0);
 }
 
-void	set_black(t_vars *vars)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < vars->map->rows)
-	{
-		j = -1;
-		while (++j < vars->map->cols)
-		{
-			vars->setting[i][j] = set_image(vars, "sfondo.xpm", i, j);
-		}
-	}
-}
-
 void	end_game(t_vars *vars, int win)
 {
+	update_banner(vars, 1);
 	if (win == 0)
-		close_win(vars);
+	{
+		mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 20,
+			0x00FF0000, "Thanos: ");
+		mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 35,
+			0x00FFFFFF, "I AM INEVITABLE!");
+	}
+	else
+	{
+		mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 20,
+			0x00FF0000, "Tony Stark: ");
+		mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 35,
+			0x00FFFFFF, "I am Iron Man!");
+	}
 }

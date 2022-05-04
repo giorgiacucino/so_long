@@ -6,6 +6,7 @@ SRC = main.c \
 	get_next_line_utils.c \
 	moves/moves.c \
 	moves/player_moves.c \
+	moves/display_moves.c \
 	banner.c \
 	finish.c
 

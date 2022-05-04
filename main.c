@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 14:44:39 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:54:48 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 int	close_win(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	if (vars->setting != NULL)
-		free_matrix((void **)vars->setting, vars->map->rows);
 	if (vars->enemies != NULL)
 		free(vars->enemies);
 	if (vars->map != NULL)
@@ -43,7 +41,7 @@ int	action_key(int keycode, t_vars *var)
 	if (keycode == 53)
 		close_win(var);
 	if (var->n_coll == 0)
-		var->setting[var->pe[0]][var->pe[1]] = set_image(var, "porta.xpm", var->pe[0], var->pe[1]);
+		set_image(var, "porta.xpm", var->pe[0], var->pe[1]);
 	return (0);
 }
 
@@ -67,24 +65,21 @@ void	set_background(t_vars *vars)
 
 	i = -1;
 	n = 0;
-	vars->setting = (t_data **) malloc (sizeof(t_data *) * vars->map->rows);
 	while (++i < vars->map->rows)
 	{
-		vars->setting[i] = (t_data *) malloc (sizeof(t_data) * vars->map->cols);
 		j = -1;
 		while (++j < vars->map->cols)
 		{
 			if (vars->map->data[i][j] == '1')
-				vars->setting[i][j] = set_image(vars, "sfondo.xpm", i, j);
+				set_image(vars, "sfondo.xpm", i, j);
 			else
-				vars->setting[i][j] = set_image(vars, "prova.xpm", i, j);
+				set_image(vars, "prova.xpm", i, j);
 			if (vars->map->data[i][j] == 'N')
 				get_enemies(vars, i, j, &n);
 			else if (vars->map->data[i][j] == 'C')
-				vars->setting[i][j] = set_image(vars, "coll.xpm", i, j);
+				set_image(vars, "coll.xpm", i, j);
 		}
 	}
-	make_banner(vars);
 }
 
 int	main(int argc, char **argv)
@@ -95,9 +90,7 @@ int	main(int argc, char **argv)
 		return (0);
 	vars = (t_vars *) malloc (sizeof(t_vars));
 	get_map(argv[1], vars);
-	if (vars->map == NULL)
-		return (0);
-	if (check_map(vars) == 1)
+	if (vars->map == NULL || check_map(vars) == 1)
 	{
 		free_map(vars->map);
 		return (0);
@@ -108,11 +101,12 @@ int	main(int argc, char **argv)
 	vars->win = mlx_new_window(vars->mlx, (vars->map->cols) * 64,
 			(vars->map->rows + 1) * 64, "so_long");
 	vars->frame = 0;
-	vars->banner = (t_data *) malloc (sizeof(t_data));
+	vars->moves = 0;
 	mlx_hook(vars->win, 2, 0, action_key, vars);
 	mlx_hook(vars->win, 17, 0, close_win, vars);
 	mlx_loop_hook(vars->mlx, update_sprites, vars);
 	set_background(vars);
+	make_banner(vars);
 	mlx_loop(vars->mlx);
 	return (0);
 }

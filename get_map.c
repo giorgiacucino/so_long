@@ -6,26 +6,25 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:04:02 by gcucino           #+#    #+#             */
-/*   Updated: 2022/04/27 14:17:02 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:58:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_matrix(void **matrix, int rows)
+void	free_map(t_map *map)
 {
 	int	i;
 
 	i = -1;
-	while (++i < rows)
-		free(matrix[i]);
-	free(matrix);
-}
-
-void	free_map(t_map *map)
-{
+	if (map == NULL)
+		return ;
 	if (map->data != NULL)
-		free_matrix((void **)map->data, map->rows);
+	{
+		while (++i < map->rows)
+			free(map->data[i]);
+		free(map->data);
+	}
 	free(map);
 }
 
