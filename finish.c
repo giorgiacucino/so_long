@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:06:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:45:28 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:53:04 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,22 @@ void	update_enemies(t_vars *vars, char *img)
 
 int	update_sprites(t_vars *vars)
 {
+	char	*player;
+	char	*enemy;
+
 	vars->frame++;
-	if (vars->frame < 50)
-	{
-		set_image(vars, "xpms/player/player1.xpm", vars->pp[0], vars->pp[1]);
-		update_enemies(vars, "xpms/enemy/enemy1.xpm");
-	}
-	else if (vars->frame < 100)
-	{
-		set_image(vars, "xpms/player/player2.xpm", vars->pp[0], vars->pp[1]);
-		update_enemies(vars, "xpms/enemy/enemy2.xpm");
-	}
-	else if (vars->frame < 150)
-	{
-		set_image(vars, "xpms/player/player3.xpm", vars->pp[0], vars->pp[1]);
-		update_enemies(vars, "xpms/enemy/enemy3.xpm");
-	}
-	else if (vars->frame < 200)
-	{
-		set_image(vars, "xpms/player/player4.xpm", vars->pp[0], vars->pp[1]);
-		update_enemies(vars, "xpms/enemy/enemy4.xpm");
-	}
 	if (vars->frame == 200)
+	{
 		vars->frame = 0;
+		return (0);
+	}
+	player = ft_strjoin_3("xpms/player/player",
+			((vars->frame) / 50) + 1, ".xpm");
+	enemy = ft_strjoin_3("xpms/enemy/enemy", ((vars->frame) / 50) + 1, ".xpm");
+	set_image(vars, player, vars->pp[0], vars->pp[1]);
+	update_enemies(vars, enemy);
+	free(player);
+	free(enemy);
 	return (0);
 }
 
@@ -68,4 +61,5 @@ void	end_game(t_vars *vars, int win)
 		mlx_string_put(vars->mlx, vars->win, 10, (vars->map->rows * 64) + 35,
 			0x00FFFFFF, "I am Iron Man!");
 	}
+	vars->end = 1;
 }

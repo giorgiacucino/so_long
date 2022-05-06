@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:46:57 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 18:22:40 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_enemy
 }				t_enemy;
 
 typedef struct s_data {
+	char	*str_id;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -49,9 +50,11 @@ typedef struct s_data {
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
+	int		end;
 	int		frame;
 	int		moves;
 	t_map	*map;
+	t_data	*imgs;
 	int		pp[2];
 	int		pe[2];
 	int		n_coll;
@@ -91,5 +94,6 @@ void	update_banner(t_vars *vars, int finish);
 void	display_moves(int vars);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_3(char *s1, int moves, char *s2);
 
 #endif

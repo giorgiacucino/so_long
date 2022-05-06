@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:04:02 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:58:02 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:41:06 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-int	check_map2(t_vars *v, int i, int j, int check[3])
+int	check_map2(t_vars *v, int i, int j, int check[2])
 {
 	char	cell;
 

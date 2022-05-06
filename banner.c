@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:29:15 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:54:27 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 12:27:27 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,7 @@ void	make_banner(t_vars *v)
 	v->banner->addr = mlx_get_data_addr(v->banner->img, &v->banner->bpp,
 			&v->banner->l_length, &v->banner->endian);
 	update_banner(v, 0);
+	if (v->n_en > 1)
+		mlx_string_put(v->mlx, v->win, 10, (v->map->rows * 64) + 50,
+			0x00FFFFFF, "Thanos used his power to duplicate himself.");
 }

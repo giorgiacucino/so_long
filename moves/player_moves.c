@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:56:33 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:58:32 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:01:10 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	choose_move_enemy(t_vars *vars, int id)
 	dy = vars->pp[1] - (vars->enemies[id].y);
 	if (abs(dx) >= abs(dy))
 	{
-		if (dx > 0 && can_go(vars, id, 1, 0))
+		if (dx >= 0 && can_go(vars, id, 1, 0))
 			move_enemy(vars, id, 1, 0);
-		else if (dx < 0 && can_go(vars, id, -1, 0))
+		else if (dx <= 0 && can_go(vars, id, -1, 0))
 			move_enemy(vars, id, -1, 0);
 		else
 		{
@@ -80,15 +80,19 @@ void	choose_move_enemy(t_vars *vars, int id)
 				move_enemy(vars, id, 0, -1);
 			else if (can_go(vars, id, 1, 0))
 				move_enemy(vars, id, 1, 0);
-			else
-				move_enemy(vars, id, 1, 0);
+			else if (can_go(vars, id, -1, 0))
+				move_enemy(vars, id, -1, 0);
+			else if (can_go(vars, id, 0, -1))
+				move_enemy(vars, id, 0, -1);
+			else if (can_go(vars, id, 0, 1))
+				move_enemy(vars, id, 0, 1);
 		}
 	}
 	else
 	{
-		if (dy > 0 && can_go(vars, id, 0, 1))
+		if (dy >= 0 && can_go(vars, id, 0, 1))
 			move_enemy(vars, id, 0, 1);
-		else if (dy < 0 && can_go(vars, id, 0, -1))
+		else if (dy <= 0 && can_go(vars, id, 0, -1))
 			move_enemy(vars, id, 0, -1);
 		else
 		{
@@ -98,8 +102,12 @@ void	choose_move_enemy(t_vars *vars, int id)
 				move_enemy(vars, id, -1, 0);
 			else if (can_go(vars, id, 0, -1))
 				move_enemy(vars, id, 0, -1);
-			else
+			else if (can_go(vars, id, 0, 1))
 				move_enemy(vars, id, 0, 1);
+			else if (can_go(vars, id, 1, 0))
+				move_enemy(vars, id, 1, 0);
+			else if (can_go(vars, id, -1, 0))
+				move_enemy(vars, id, -1, 0);
 		}
 	}
 }

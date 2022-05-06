@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:49:16 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:37:54 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:09:51 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	move_player(t_vars *vars, int x, int y)
 	vars->moves ++;
 	update_banner(vars, 0);
 	display_moves(vars->moves);
-	if (vars->pp[0] == vars->pe[0] && vars->pp[1] == vars->pe[1])
+	if (vars->pp[0] == vars->pe[0] && vars->pp[1] == vars->pe[1]
+		&& vars->n_coll == 0)
 		end_game(vars, 1);
 	else
 		set_enemies(vars);

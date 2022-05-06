@@ -32,7 +32,7 @@ ex: $(NAME)
 
 clean:
 	${RM} $(OBJ)
-	make -C ./mlx/ clean
+# make -C ./mlx/ clean
 
 fclean: clean
 	${RM} $(NAME) ${OBJ}

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 18:54:48 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/06 18:23:31 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,37 @@ int	close_win(t_vars *vars)
 }
 
 int	action_key(int keycode, t_vars *var)
-{
-	if (keycode == 0)
-		move_player(var, 0, -1);
-	else if (keycode == 1)
-		move_player(var, 1, 0);
-	else if (keycode == 2)
-		move_player(var, 0, 1);
-	else if (keycode == 13)
-		move_player(var, -1, 0);
+{	
 	if (keycode == 53)
 		close_win(var);
+	if (var->end == 1)
+		return (0);
+	if (keycode == 0 || keycode == 123)
+		move_player(var, 0, -1);
+	else if (keycode == 1 || keycode == 125)
+		move_player(var, 1, 0);
+	else if (keycode == 2 || keycode == 124)
+		move_player(var, 0, 1);
+	else if (keycode == 13 || keycode == 126)
+		move_player(var, -1, 0);
+	else if (keycode == 42)
+		end_game(var, 1);
 	if (var->n_coll == 0)
 		set_image(var, "porta.xpm", var->pe[0], var->pe[1]);
 	return (0);
 }
 
-t_data	set_image(t_vars *vars, char *file, int x, int y)
-{
-	t_data	img;
-	int		img_width;
-	int		img_height;
+void	load_images()
 
-	img.img = mlx_xpm_file_to_image(vars->mlx, file, &img_width, &img_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.l_length, &img.endian);
+void	set_image(t_vars *vars, char *file, int x, int y)
+{
+	// t_data	img;
+	// int		img_width;
+	// int		img_height;
+
+	// img.img = mlx_xpm_file_to_image(vars->mlx, file, &img_width, &img_height);
+	// img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.l_length, &img.endian);
 	mlx_put_image_to_window(vars->mlx, vars->win, img.img, y * 64, x * 64);
-	return (img);
 }
 
 void	set_background(t_vars *vars)
@@ -102,6 +107,7 @@ int	main(int argc, char **argv)
 			(vars->map->rows + 1) * 64, "so_long");
 	vars->frame = 0;
 	vars->moves = 0;
+	vars->end = 0;
 	mlx_hook(vars->win, 2, 0, action_key, vars);
 	mlx_hook(vars->win, 17, 0, close_win, vars);
 	mlx_loop_hook(vars->mlx, update_sprites, vars);
