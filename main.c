@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/06 18:23:31 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/09 18:42:30 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,46 @@ int	action_key(int keycode, t_vars *var)
 	else if (keycode == 42)
 		end_game(var, 1);
 	if (var->n_coll == 0)
-		set_image(var, "porta.xpm", var->pe[0], var->pe[1]);
+		set_image(var, var->imgs->exit, var->pe[0], var->pe[1]);
 	return (0);
 }
 
-void	load_images()
-
-void	set_image(t_vars *vars, char *file, int x, int y)
+void	load_img(t_vars *vars, t_data *img, char *str)
 {
-	// t_data	img;
+	int		img_width;
+	int		img_height;
+
+	img->img = mlx_xpm_file_to_image(vars->mlx,
+			str, &img_width, &img_height);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->l_length, &img->endian);
+}
+
+void	load_imgs(t_vars *vars)
+{
+	int		i;
+	char	*pl;
+	char	*en;
+
+	i = 0;
+	load_img(vars, &vars->imgs->wall, "sfondo.xpm");
+	load_img(vars, &vars->imgs->null, "prova.xpm");
+	load_img(vars, &vars->imgs->coll, "coll.xpm");
+	load_img(vars, &vars->imgs->exit, "porta.xpm");
+	vars->imgs->enemy = (t_data *) malloc (sizeof(t_data) * 4);
+	vars->imgs->player = (t_data *) malloc (sizeof(t_data) * 4);
+	while (++i < 5)
+	{
+		pl = ft_strjoin_3("xpms/player/player", i, ".xpm");
+		en = ft_strjoin_3("xpms/enemy/enemy", i, ".xpm");
+		load_img(vars, &vars->imgs->player[i - 1], pl);
+		load_img(vars, &vars->imgs->enemy[i - 1], en);
+		free(en);
+		free(pl);
+	}
+}
+
+void	set_image(t_vars *vars, t_data img, int x, int y)
+{
 	// int		img_width;
 	// int		img_height;
 
@@ -76,13 +107,13 @@ void	set_background(t_vars *vars)
 		while (++j < vars->map->cols)
 		{
 			if (vars->map->data[i][j] == '1')
-				set_image(vars, "sfondo.xpm", i, j);
+				set_image(vars, vars->imgs->wall, i, j);
 			else
-				set_image(vars, "prova.xpm", i, j);
+				set_image(vars, vars->imgs->null, i, j);
 			if (vars->map->data[i][j] == 'N')
 				get_enemies(vars, i, j, &n);
 			else if (vars->map->data[i][j] == 'C')
-				set_image(vars, "coll.xpm", i, j);
+				set_image(vars, vars->imgs->coll, i, j);
 		}
 	}
 }
@@ -108,8 +139,10 @@ int	main(int argc, char **argv)
 	vars->frame = 0;
 	vars->moves = 0;
 	vars->end = 0;
+	vars->imgs = (t_imgs *) malloc (sizeof(t_imgs));
 	mlx_hook(vars->win, 2, 0, action_key, vars);
 	mlx_hook(vars->win, 17, 0, close_win, vars);
+	load_imgs(vars);
 	mlx_loop_hook(vars->mlx, update_sprites, vars);
 	set_background(vars);
 	make_banner(vars);

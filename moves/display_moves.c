@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:04:32 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/04 17:18:34 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/09 18:04:07 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*ft_itoa(int n)
 		ret[0] = '-';
 		i = - (long) n;
 	}
-	while (size-- && i != 0)
+	while (size--)
 	{
 		ret[size] = (i % 10) + 48;
 		i = i / 10;

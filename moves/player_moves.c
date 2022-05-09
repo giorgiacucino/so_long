@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:56:33 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/06 16:01:10 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/09 18:38:00 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	move_enemy(t_vars *vars, int id, int x, int y)
 {
-	set_image(vars, "prova.xpm", vars->enemies[id].x, vars->enemies[id].y);
+	set_image(vars, vars->imgs->null, vars->enemies[id].x, vars->enemies[id].y);
 	vars->map->data[vars->enemies[id].x + x][vars->enemies[id].y + y] = 'N';
 	vars->map->data[vars->enemies[id].x][vars->enemies[id].y] = '0';
 	vars->enemies[id].x += x;

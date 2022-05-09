@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/06 18:22:40 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/09 18:17:56 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_imgs {
+	t_data	wall;
+	t_data	null;
+	t_data	coll;
+	t_data	exit;
+	t_data	*player;
+	t_data	*enemy;
+}				t_imgs;
+
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
@@ -54,7 +63,7 @@ typedef struct s_vars {
 	int		frame;
 	int		moves;
 	t_map	*map;
-	t_data	*imgs;
+	t_imgs	*imgs;
 	int		pp[2];
 	int		pe[2];
 	int		n_coll;
@@ -78,7 +87,7 @@ void	get_map(char *input, t_vars *vars);
 int		check_map(t_vars *v);
 void	free_map(t_map *map);
 int		get_h_l(char *input, t_map *map);
-t_data	set_image(t_vars *vars, char *file, int x, int y);
+void	set_image(t_vars *vars, t_data img, int x, int y);
 void	get_enemies(t_vars *vars, int i, int j, int *n);
 void	move_player(t_vars *vars, int x, int y);
 void	choose_move_enemy(t_vars *vars, int id);
