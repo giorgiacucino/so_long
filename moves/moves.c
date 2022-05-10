@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:49:16 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/09 18:35:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:09:37 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	move_player(t_vars *vars, int x, int y)
 		set_image(vars, vars->imgs->null, vars->pp[0] + x, vars->pp[1] + y);
 		vars->map->data[vars->pp[0] + x][vars->pp[1] + y] = '0';
 		vars->n_coll--;
-		vars->status_en = 2;
+		vars->status_en = 3;
 	}
 	set_image(vars, vars->imgs->null, vars->pp[0], vars->pp[1]);
 	vars->map->data[vars->pp[0] + x][vars->pp[1] + y] = 'P';

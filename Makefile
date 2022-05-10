@@ -8,7 +8,8 @@ SRC = main.c \
 	moves/player_moves.c \
 	moves/display_moves.c \
 	banner.c \
-	finish.c
+	finish.c \
+	setup.c
 
 OBJ = $(SRC:.c=.o)
 

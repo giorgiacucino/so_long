@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:06:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/09 18:45:22 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:07:33 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,18 @@ void	update_enemies(t_vars *vars, int img)
 
 	i = -1;
 	while (++i < vars->n_en)
-	{
-		set_image(vars, vars->imgs->enemy[img], vars->enemies[i].x, vars->enemies[i].y);
+	{	
+		set_image(vars, vars->imgs->null,
+			vars->enemies[i].x, vars->enemies[i].y);
+		if (vars->status_en == 2)
+			set_image(vars, vars->imgs->blocked,
+				vars->enemies[i].x, vars->enemies[i].y);
+		else if (vars->status_en == 1)
+			set_image(vars, vars->imgs->escaping,
+				vars->enemies[i].x, vars->enemies[i].y);
+		else
+			set_image(vars, vars->imgs->enemy[img],
+				vars->enemies[i].x, vars->enemies[i].y);
 	}
 }
 
@@ -31,7 +41,10 @@ int	update_sprites(t_vars *vars)
 		vars->frame = 0;
 		return (0);
 	}
-	set_image(vars, vars->imgs->player[(vars->frame / 50)], vars->pp[0], vars->pp[1]);
+	set_image(vars, vars->imgs->null,
+		vars->pp[0], vars->pp[1]);
+	set_image(vars, vars->imgs->player[(vars->frame / 50)],
+		vars->pp[0], vars->pp[1]);
 	update_enemies(vars, (vars->frame / 50));
 	return (0);
 }

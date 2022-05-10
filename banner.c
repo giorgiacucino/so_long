@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:29:15 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/06 12:27:27 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:34:03 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	write_moves(t_vars *v)
 		0x00FFFFFF, spch);
 	if (v->moves > 1)
 		free(spch);
-	if (v->status_en > 0)
+	if (v->status_en > 1)
 	{
-		if (v->status_en == 1)
+		if (v->status_en == 2)
 			spkr = "He's breaking free!";
 		else
 			spkr = "You've blocked him";

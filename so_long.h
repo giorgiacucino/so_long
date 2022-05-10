@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/09 18:17:56 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:30:38 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_imgs {
 	t_data	exit;
 	t_data	*player;
 	t_data	*enemy;
+	t_data	escaping;
+	t_data	blocked;
 }				t_imgs;
 
 typedef struct s_vars {
@@ -104,5 +106,6 @@ void	display_moves(int vars);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_3(char *s1, int moves, char *s2);
+void	set_background(t_vars *vars);
 
 #endif

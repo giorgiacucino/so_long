@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:56:33 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/09 18:38:00 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:29:39 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,13 @@ void	move_enemy(t_vars *vars, int id, int x, int y)
 		end_game(vars, 0);
 }
 
-void	get_enemies(t_vars *vars, int i, int j, int *n)
-{
-	vars->enemies[*n].id = *n;
-	vars->enemies[*n].x = i;
-	vars->enemies[*n].y = j;
-	(*n)++;
-}
-
 void	set_enemies(t_vars *vars)
 {
 	int	i;
 
 	i = -1;
+	if (vars->status_en != 0)
+		vars->status_en--;
 	while (++i < vars->n_en)
 	{
 		if (vars->enemies[i].x == vars->pp[0]
@@ -45,8 +39,6 @@ void	set_enemies(t_vars *vars)
 		else if (vars->status_en == 0)
 			choose_move_enemy(vars, i);
 	}
-	if (vars->status_en != 0)
-		vars->status_en--;
 }
 
 int	can_go(t_vars *vars, int id, int x, int y)
