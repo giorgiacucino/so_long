@@ -6,11 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:06:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/10 18:07:33 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/11 18:23:44 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 void	update_enemies(t_vars *vars, int img)
 {
@@ -21,10 +21,10 @@ void	update_enemies(t_vars *vars, int img)
 	{	
 		set_image(vars, vars->imgs->null,
 			vars->enemies[i].x, vars->enemies[i].y);
-		if (vars->status_en == 2)
+		if (vars->status_en == 2 && (img == 0 || img == 2))
 			set_image(vars, vars->imgs->blocked,
 				vars->enemies[i].x, vars->enemies[i].y);
-		else if (vars->status_en == 1)
+		else if (vars->status_en == 2)
 			set_image(vars, vars->imgs->escaping,
 				vars->enemies[i].x, vars->enemies[i].y);
 		else

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:59:58 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/10 18:30:38 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/11 17:24:01 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ char	*ft_itoa(int n);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_3(char *s1, int moves, char *s2);
 void	set_background(t_vars *vars);
+void	ft_bzero(void *s, size_t n);
 
 #endif

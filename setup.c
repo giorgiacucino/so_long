@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 18:22:54 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/10 18:25:37 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/11 14:42:39 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	load_imgs(t_vars *vars)
 	i = 0;
 	load_img(vars, &vars->imgs->wall, "xpms/wall.xpm");
 	load_img(vars, &vars->imgs->null, "xpms/null.xpm");
-	load_img(vars, &vars->imgs->coll, "xpms/coll2.xpm");
-	load_img(vars, &vars->imgs->exit, "xpms/porta2.xpm");
+	load_img(vars, &vars->imgs->coll, "xpms/coll.xpm");
+	load_img(vars, &vars->imgs->exit, "xpms/porta.xpm");
 	load_img(vars, &vars->imgs->escaping, "xpms/enemy_escaping.xpm");
 	load_img(vars, &vars->imgs->blocked, "xpms/enemy_blocked.xpm");
 	vars->imgs->enemy = (t_data *) malloc (sizeof(t_data) * 4);

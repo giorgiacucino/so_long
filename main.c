@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:37:31 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/10 18:24:25 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/11 18:43:18 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
+void	error_map(t_vars *vars, int flag)
+{
+	write(1, "Error\n", 7);
+	if (vars->map != NULL)
+	{
+		if (flag == 1)
+			write(1, "There is a char different from 1 on the border\n", 48);
+		if (flag == 2)
+			write(1, "There is a char different from the standard ones\n", 50);
+		if (flag == 3)
+			write(1, "There is more than 1 player\n", 29);
+		if (flag == 4)
+			write(1, "There is more than 1 exit\n", 27);
+		free(vars->map);
+	}
+	else
+		write(1, "Error in the allocation of the map\n", 36);
+	free(vars);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	*vars;
@@ -79,9 +99,9 @@ int	main(int argc, char **argv)
 	vars = (t_vars *) malloc (sizeof(t_vars));
 	ft_bzero(vars, sizeof(vars));
 	get_map(argv[1], vars);
-	if (vars->map == NULL || check_map(vars) == 1)
+	if (vars->map == NULL || check_map(vars) != 0)
 	{
-		free_map(vars->map);
+		error_map(vars, check_map(vars));
 		return (0);
 	}
 	if (vars->n_en != 0)

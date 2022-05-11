@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:29:15 by gcucino           #+#    #+#             */
-/*   Updated: 2022/05/10 18:34:03 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/05/11 18:43:03 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	write_moves(t_vars *v)
 	if (v->status_en > 1)
 	{
 		if (v->status_en == 2)
-			spkr = "He's breaking free!";
+			spkr = "He destroyed the drone!";
 		else
-			spkr = "You've blocked him";
+			spkr = "The Stark drone is attacking him!";
 		mlx_string_put(v->mlx, v->win, 10, (v->map->rows * 64) + 50,
 			0x00FFFFFF, spkr);
 	}
@@ -88,7 +88,7 @@ void	update_banner(t_vars *vars, int finish)
 void	make_banner(t_vars *v)
 {
 	v->banner = (t_data *) malloc (sizeof(t_data));
-	v->banner->img = mlx_new_image(v->mlx, 64 * v->map->cols, 64);
+	v->banner->img = mlx_new_image(v->mlx, 64 * v->map->cols, 128);
 	v->banner->addr = mlx_get_data_addr(v->banner->img, &v->banner->bpp,
 			&v->banner->l_length, &v->banner->endian);
 	update_banner(v, 0);
